@@ -1,12 +1,12 @@
 package Subclasses;
+import AbstractFiles.AbstractMedicalStaff;
 
 public class Nurse extends AbstractMedicalStaff {
     public Nurse(String nurseId, String name, int age, String gender, int contact, String availability) {
-        super(nurseId, name, age, gender, contact, availability);
-    }
+            super(nurseId, name, age, gender, contact, availability);
+        }
 
-    public Nurse() {
-    }
+
 
     @Override
     public void updateProfile() {

@@ -1,8 +1,6 @@
 package AbstractFiles;
+public abstract class AbstractPerson{
 
-import Subclasses.Nurse;
-
-public abstract class AbstractPerson extends Nurse {
     private String id;
     private String name;
     private int age;

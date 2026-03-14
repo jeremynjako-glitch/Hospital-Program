@@ -1,5 +1,7 @@
 package Subclasses;
 
+import InterfaceClasses.SupplyCheck;
+
 public class Medicine implements SupplyCheck {
     private String medicineID;
     private String receiptDate;

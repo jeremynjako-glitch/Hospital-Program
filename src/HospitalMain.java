@@ -1,8 +1,9 @@
 import AbstractFiles.AbstractPerson;
-import HospitalMain.java.Manageable;
+import InterfaceClasses.Management;
 import Subclasses.*;
 
-class Hospital implements Manageable {
+
+class Hospital implements Management {
     private String department;
     private String[] staffList;
     private String[] patientList;
@@ -24,31 +25,36 @@ class Hospital implements Manageable {
     }
 
     public static void main(String[] args) {
-
-        AbstractPerson patient1 = new Patient("P001", "John Doe", 30, "Male", 1234567890,
+        // 1. Instantiate Objects
+        Patient patient1 = new Patient("P001", "John Kamau", 30, "Male", 1234567890,
                 "O+", "2026-02-25", "Active");
 
         Doctor doctor1 = new Doctor("D001", "Dr. Smith", 45, "Male", 987654321,
                 "Cardiology", 12345, "Available");
 
-        AbstractPerson nurse1 = new Nurse("N001", "Sarah Wilson", 28, "Female", 1122334455, "On Duty");
+        // Fixed: Declare as Nurse (instead of AbstractPerson) to access nurse-specific methods
+        Nurse nurse1 = new Nurse("N001", "Sarah Wilson", 28, "Female", 1122334455, "On Duty");
 
-        Appointment appt = new Appointment("John Doe", "Dr. Smith", "10:00 AM", "Scheduled", "2026-02-26");
+        Appointment appt = new Appointment("John Kamau", "Dr. Smith", "10:00 AM", "Scheduled", "2026-02-26");
 
         Medicine med = new Medicine("M001", "2026-01-01", "2027-01-01", 100);
 
+        // 2. Hospital Management
         String[] staff = {"Dr. Smith", "Sarah Wilson"};
-        String[] patients = {"John Doe"};
+        String[] patients = {"John Kamau"};
         Hospital hospital = new Hospital("Cardiology", staff, patients);
 
         System.out.println("=== HOSPITAL MANAGEMENT SYSTEM ===");
 
-        AbstractPerson[] persons = {patient1, doctor1, (AbstractPerson) nurse1};
+        // 3. Demonstrating Polymorphism
+        AbstractPerson[] persons = {patient1, doctor1, nurse1};
         for (AbstractPerson p : persons) {
             System.out.println(p.getName() + " (ID: " + p.getId() + ", Age: " + p.getAge() + ")");
             p.updateProfile();
         }
 
+        // 4. Executing Specific Subclass Methods
+        System.out.println("\n--- Staff Actions ---");
         doctor1.assignPatient();
         doctor1.updateAvailability();
         doctor1.viewPatients();
@@ -56,11 +62,12 @@ class Hospital implements Manageable {
         nurse1.checkAvailability();
         nurse1.assignPatient();
 
+        System.out.println("\n--- Patient & Supply Actions ---");
         patient1.register();
-
         med.checkSupply();
         hospital.checkDepartment();
 
+        System.out.println("\n--- Appointment Details ---");
         System.out.println("Appointment: " + appt.getPatient() + " with " + appt.getDoctor() +
                 " on " + appt.getDate());
     }

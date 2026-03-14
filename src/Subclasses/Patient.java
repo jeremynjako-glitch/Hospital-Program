@@ -1,5 +1,7 @@
 package Subclasses;
 
+import AbstractFiles.AbstractPerson;
+
 public class Patient extends AbstractPerson {
     private String bloodGroup;
     private String admissionDate;
