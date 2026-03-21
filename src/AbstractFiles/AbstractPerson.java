@@ -1,4 +1,7 @@
 package AbstractFiles;
+
+import javax.sound.midi.InvalidMidiDataException;
+
 public abstract class AbstractPerson{
 
     private String id;
@@ -16,13 +19,22 @@ public abstract class AbstractPerson{
     }
 
     public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public void setId(String id) throws InvalidMidiDataException{this.id = id; }
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
     public int getAge() { return age; }
-    public void setAge(int age) { this.age = age; }
+    public void setAge(int age) throws InvalidMidiDataException {
+        if (age < 0 || age > 120){
+            throw new InvalidMidiDataException("Please input an age between 0 and 120.");
+        }
+        this.age = age;
+    }
+
     public String getGender() { return gender; }
     public void setGender(String gender) { this.gender = gender; }
+
     public int getContact() { return contact; }
     public void setContact(int contact) { this.contact = contact; }
 

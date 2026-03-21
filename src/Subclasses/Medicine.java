@@ -17,6 +17,9 @@ public class Medicine implements SupplyCheck {
 
     @Override
     public int checkSupply() {
+        if (this.supply <= 0) {
+            throw new ArithmeticException (medicineID + "is out of stock.");
+        }
         System.out.println("Medicine " + medicineID + " supply: " + supply);
         return supply;
     }
