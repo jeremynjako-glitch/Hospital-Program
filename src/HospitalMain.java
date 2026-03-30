@@ -27,6 +27,11 @@ class Hospital implements Management, Serializable {
     }
 
     public static Hospital loadHospitalData(String filename) {
+        File file = new File(filename);
+        if (!file.exists()){
+            System.out.println("No existing data found at "+ filename);
+            return null;
+        }
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
             return (Hospital) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -35,8 +40,10 @@ class Hospital implements Management, Serializable {
         }
     }
 
-    public void addStaff(AbstractMedicalStaff person){
-        boolean add = staffList.add(person);
+    public void addStaff(AbstractMedicalStaff person) {
+        if (person != null) {
+            staffList.add(person);
+        }
     }
 
     @Override
@@ -109,8 +116,6 @@ class Hospital implements Management, Serializable {
             hospital = new Hospital("Cardiology", new String[]{}, new String[]{});
             System.out.println("No existing data found. Created new Hospital instance.");
         }
-
-
         hospital.saveHospitalData(filePath);
     }
 }

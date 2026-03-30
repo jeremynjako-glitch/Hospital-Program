@@ -1,9 +1,6 @@
 package AbstractFiles;
 
 import java.io.Serializable;
-import javax.sound.midi.InvalidMidiDataException;
-import java.lang.IllegalArgumentException;
-
 
 public abstract class AbstractPerson implements Serializable {
     private static final long serialversionUID = 1L;
@@ -23,13 +20,13 @@ public abstract class AbstractPerson implements Serializable {
     }
 
     public String getId() { return id; }
-    public void setId(String id) throws InvalidMidiDataException{this.id = id; }
+    public void setId(String id) throws IllegalArgumentException{this.id = id; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
     public int getAge() { return age; }
-    public void setAge(int age) throws InvalidMidiDataException {
+    public void setAge(int age) throws IllegalArgumentException {
         if (age < 0 || age > 120){
             throw new IllegalArgumentException("Please input an age between 0 and 120.");
         }

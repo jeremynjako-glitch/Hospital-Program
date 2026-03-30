@@ -1,5 +1,9 @@
 package Subclasses;
 
+import java.io.Serializable;
+
+
+
 public class Appointment {
     private String patient;
     private String doctor;
