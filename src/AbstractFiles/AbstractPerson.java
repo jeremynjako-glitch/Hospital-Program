@@ -1,8 +1,12 @@
 package AbstractFiles;
 
+import java.io.Serializable;
 import javax.sound.midi.InvalidMidiDataException;
 import java.lang.IllegalArgumentException;
-public abstract class AbstractPerson{
+
+
+public abstract class AbstractPerson implements Serializable {
+    private static final long serialversionUID = 1L;
 
     private String id;
     private String name;

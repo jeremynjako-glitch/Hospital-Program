@@ -4,16 +4,35 @@ import InterfaceClasses.Management;
 import Subclasses.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
 
 
-
-class Hospital implements Management {
+class Hospital implements Management, Serializable {
+    private static final long serialVersionUID = 1L;
     private final String department;
     private List<AbstractMedicalStaff> staffList = new ArrayList<>();
     private List<Patient> patientList = new ArrayList<>();
 
-    public Hospital(String department) {
+    public Hospital(String department, String[] strings, String[] strings1) {
         this.department = department;
+    }
+
+    public void saveHospitalData(String filename){
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
+            out.writeObject(this); // Saves the entire Hospital object and all lists inside it
+            System.out.println("Data successfully saved to " + filename);
+        } catch (IOException e) {
+            System.err.println("Error saving data: " + e.getMessage());
+        }
+    }
+
+    public static Hospital loadHospitalData(String filename) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
+            return (Hospital) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error loading data: " + e.getMessage());
+            return null;
+        }
     }
 
     public void addStaff(AbstractMedicalStaff person){
@@ -49,7 +68,7 @@ class Hospital implements Management {
 
         String[] staff = {"Dr. Smith", "Sarah Wilson"};
         String[] patients = {"John Kamau"};
-        Hospital hospital = new Hospital("Cardiology");
+        Hospital hospital = new Hospital("Cardiology", new String[]{}, new String[]{});
 
         System.out.println("=== HOSPITAL MANAGEMENT SYSTEM ===");
 
@@ -77,7 +96,22 @@ class Hospital implements Management {
         System.out.println("\n--- Appointment Details ---");
         System.out.println("Appointment: " + appt.getPatient() + " with " + appt.getDoctor() +
                 " on " + appt.getDate());
-    }
 
+
+        String filePath = "hospital_data.ser";
+
+        File file = new File(filePath);
+        if (file.exists()) {
+            hospital = Hospital.loadHospitalData(filePath);
+            System.out.println("Existing data loaded for department: " + hospital.getDepartment());
+        } else {
+
+            hospital = new Hospital("Cardiology", new String[]{}, new String[]{});
+            System.out.println("No existing data found. Created new Hospital instance.");
+        }
+
+
+        hospital.saveHospitalData(filePath);
+    }
 }
 

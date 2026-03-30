@@ -17,7 +17,7 @@ public class Medicine implements SupplyCheck {
         this.receiptDate = receiptDate;
         this.expiryDate = expiryDate;
         this.supply = supply;
-        Medicine put = inventory.put(medicineID, this);
+        inventory.put(medicineID, this);
     }
 
     @Override
