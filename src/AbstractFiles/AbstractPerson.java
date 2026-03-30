@@ -1,7 +1,7 @@
 package AbstractFiles;
 
 import javax.sound.midi.InvalidMidiDataException;
-
+import java.lang.IllegalArgumentException;
 public abstract class AbstractPerson{
 
     private String id;
@@ -27,7 +27,7 @@ public abstract class AbstractPerson{
     public int getAge() { return age; }
     public void setAge(int age) throws InvalidMidiDataException {
         if (age < 0 || age > 120){
-            throw new InvalidMidiDataException("Please input an age between 0 and 120.");
+            throw new IllegalArgumentException("Please input an age between 0 and 120.");
         }
         this.age = age;
     }

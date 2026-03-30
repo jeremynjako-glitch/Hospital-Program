@@ -1,17 +1,23 @@
+import AbstractFiles.AbstractMedicalStaff;
 import AbstractFiles.AbstractPerson;
 import InterfaceClasses.Management;
 import Subclasses.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 class Hospital implements Management {
-    private String department;
-    private String[] staffList;
-    private String[] patientList;
+    private final String department;
+    private List<AbstractMedicalStaff> staffList = new ArrayList<>();
+    private List<Patient> patientList = new ArrayList<>();
 
-    public Hospital(String department, String[] staffList, String[] patientList) {
+    public Hospital(String department) {
         this.department = department;
-        this.staffList = staffList;
-        this.patientList = patientList;
+    }
+
+    public void addStaff(AbstractMedicalStaff person){
+        boolean add = staffList.add(person);
     }
 
     @Override
@@ -43,7 +49,7 @@ class Hospital implements Management {
 
         String[] staff = {"Dr. Smith", "Sarah Wilson"};
         String[] patients = {"John Kamau"};
-        Hospital hospital = new Hospital("Cardiology", staff, patients);
+        Hospital hospital = new Hospital("Cardiology");
 
         System.out.println("=== HOSPITAL MANAGEMENT SYSTEM ===");
 
@@ -72,4 +78,6 @@ class Hospital implements Management {
         System.out.println("Appointment: " + appt.getPatient() + " with " + appt.getDoctor() +
                 " on " + appt.getDate());
     }
+
 }
+
