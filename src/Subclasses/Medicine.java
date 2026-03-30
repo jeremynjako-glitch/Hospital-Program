@@ -1,7 +1,6 @@
 package Subclasses;
 
 import InterfaceClasses.SupplyCheck;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
